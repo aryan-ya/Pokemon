@@ -1,7 +1,13 @@
+import Search from "../Search/Search";
+import "./Pokedex.css";
 function Pokedex() {
     return (
         <>
-        pokedex
+      <div className="pokedex">
+        <h1>Pokedex</h1>
+        <Search />
+
+        </div>
         </>
     )
 }
