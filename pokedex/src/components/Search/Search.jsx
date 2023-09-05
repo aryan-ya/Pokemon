@@ -1,11 +1,13 @@
-import "./Search.css";
+// import { useEffect } from "react";
+
+import './Search.css';
 
 
 function Search() {
     return(
     <>
     <div className="search-wrapper">
-    <input id="pokemon-name-search" placeholder="pokemon name"/>
+    <input id="search-pokemon" placeholder="pokemon name"/>
     </div>
     </>
     )
