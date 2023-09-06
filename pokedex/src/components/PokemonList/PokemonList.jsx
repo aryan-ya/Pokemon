@@ -1,46 +1,58 @@
 import { useEffect, useState } from "react";
+import Pokemon from "../Pokemon/Pokemon";
 import axios from 'axios';
 import './PokemonList.css';
 function PokemonList(){
     // const  [x ,setX] = useState(0);
     // const [y , setY] = useState(0);
 
-    const [pokemonList ,setpokemonList] = useState([]);
-    const [isLoading ,setIsLoading] = useState(true);
+    const [pokemonList , setpokemonList] = useState([]);
+    const [isLoading , setIsLoading] = useState(true);
 
 
    async function downloadpokemons() {
         const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
         const pokemonResults =  response.data.results;
         const pokemonResultPromise = pokemonResults.map((pokemon) => axios.get(pokemon.url));
-        const pokemonData = await axios.all(pokemonResultPromise)
-        console.log(pokemonData.data);
-         setIsLoading(false);
+        const pokemonData = await axios.all(pokemonResultPromise);
+        console.log(pokemonData);
 
-       setPokemonList(pokemonData.map(pokemonData)=>{
-         const pokemon = pokeData.data;
 
-       })
+        const res = pokemonData.map((pokeData) =>{
+          const  pokemon = pokeData.data;
+         return {
+          id:pokemon.id,
+          name: pokemon.name, 
+          image: (pokemon.sprites.other) ? pokemon.sprites.other.dream_world.front_default : pokemon.sprites.front_shiny,
+          type: pokemon.types
+        }
+      });
+
+      console.log(res);
+      setpokemonList(res);
+      setIsLoading(false);
     };
+  
+
+
+     
+  
 
     useEffect(() =>{
         downloadpokemons();
-    }, )
+    },[] );
 
-
+  
 
     return (
-        <>
+       
        <div className="pokemon-list-wrapper">
-         pokemon list
-         {(isLoading) ?  'Loading ....' : 'Data downloaded'}
-       </div>
-        
-        
-        </>
+        <div> pokemon list</div>
+         {(isLoading) ?  'Loading ....' :  pokemonList.map((p) => <Pokemon name ={p.name} image ={p.image} key ={p.id} />)} 
+         </div>
+
     )
-}
 
 
-
-export default PokemonList;
+    }
+    export default PokemonList;
