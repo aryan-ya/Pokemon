@@ -9,10 +9,12 @@ function PokemonList(){
     const [pokemonList , setpokemonList] = useState([]);
     const [isLoading , setIsLoading] = useState(true);
 
+    const POKEDEX_URL = 'https://pokeapi.co/api/v2/pokemon';
+
 
    async function downloadpokemons() {
-        const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
-        const pokemonResults =  response.data.results;
+        const response = await axios.get( POKEDEX_URL); //THE DOWNLOAD  LIST OF 20 POKEMON
+        const pokemonResults =  response.data.results; //we get the array of pokemon
         const pokemonResultPromise = pokemonResults.map((pokemon) => axios.get(pokemon.url));
         const pokemonData = await axios.all(pokemonResultPromise);
         console.log(pokemonData);
