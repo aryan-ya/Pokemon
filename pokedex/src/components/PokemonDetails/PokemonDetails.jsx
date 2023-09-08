@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom";
 
 function PokemonDetails() {
   const { id } = useParams();
-  const [pokemon , setPokemon] = useState({});
+  const [pokeemon , setPokeemon] = useState({});
   console.log(id);
 
   async function downloadPokemon(){
    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
-   setPokemon({
+   setPokeemon({
    name: response.data.name,
    image: response.data.sprites.other.dream_world.front_default,
    weight : response.data.weight,
@@ -27,16 +27,14 @@ function PokemonDetails() {
 
   return(
     <div className="pokemon-details-wrapper">
-        <div className="pokemon-name">name : {pokemon.name}</div>
-        <img className="pokemon-image"  src={pokemon.image}  />
-         <div>Height: {pokemon.height}</div>
-        <div>Weight: {pokemon.weight}</div>
+        <div className="pokemon-details-name">name : {pokeemon.name}</div>
+        <img className="pokemon-details-image"  src={pokeemon.image}  />
+         <div>Height: {pokeemon.height}</div>
+        <div>Weight: {pokeemon.weight}</div>
 
 
         <div className="pokemon-details-types">
-            {pokemon.types && pokemon.types.map((t) =>
-              <div key={t}>{t}</div>
-            )}
+        {pokeemon.types && pokeemon.types.map((t) => <div key={t}>{t}</div>)}
         </div>
     </div>
   )
