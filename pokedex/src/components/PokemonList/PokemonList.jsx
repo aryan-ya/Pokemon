@@ -22,7 +22,7 @@ function PokemonList(){
         const response = await axios.get(pokedexUrl); //THE DOWNLOAD  LIST OF 20 POKEMON
         const pokemonResults =  response.data.results; //we get the array of pokemon
 
-       console.log(response.data);
+      //  console.log(response.data);
        setNextUrl(response.data.next);
        setPrevUrl(response.data.previous);
 
@@ -41,7 +41,7 @@ function PokemonList(){
         }
       });
 
-      console.log(res);
+      // console.log(res);
       setpokemonList(res);
       setIsLoading(false);
     };
@@ -63,7 +63,7 @@ function PokemonList(){
        <div className="pokemon-list-wrapper">
         <div> </div>
          <div className="pokemon-wrapper">
-         {(isLoading) ?  'Loading ....' :  pokemonList.map((p) => <Pokemon name ={p.name} image ={p.image} key ={p.id} />)} 
+         {(isLoading) ?  'Loading ....' :  pokemonList.map((p) => <Pokemon name ={p.name} image ={p.image} key ={p.id} id = {p.id} />)} 
          </div>
 
          <div className="controls">
